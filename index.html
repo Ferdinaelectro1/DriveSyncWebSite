@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DriveSync — Guide d'utilisation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --bg: #080f14;
@@ -16,6 +18,7 @@
       --white: #f0f6ff;
       --muted: #5a7a8a;
       --font-display: 'Syne', sans-serif;
+      --font-title: 'Outfit', sans-serif;
       --font-mono: 'Space Mono', monospace;
     }
 
@@ -110,9 +113,13 @@
     main {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      max-width: 1500px;
       margin: 0 auto;
-      padding: 60px 24px 120px;
+      padding: 72px 64px 140px;
+    }
+
+    @media (max-width: 1100px) {
+      main { padding: 60px 32px 120px; }
     }
 
     /* ── STEP CARD ── */
@@ -151,32 +158,41 @@
     }
 
     .step-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
       color: var(--white);
     }
 
     .step-description {
-      font-size: 1.05rem;
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 400;
       line-height: 1.75;
-      color: #8aacbc;
-      margin-bottom: 40px;
-      max-width: 680px;
+      color: #9ec0d0;
+      margin-bottom: 48px;
+      max-width: 880px;
     }
 
     /* ── IMAGES ── */
     .images-grid {
       display: grid;
-      gap: 16px;
-      margin-bottom: 48px;
+      gap: 24px;
+      margin-bottom: 56px;
     }
 
     .images-grid.one   { grid-template-columns: 1fr; }
     .images-grid.two   { grid-template-columns: 1fr 1fr; }
     .images-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+    .images-grid.one .img-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
 
     .img-wrapper {
       position: relative;
@@ -318,8 +334,10 @@
     }
 
     .finish-card h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
+      font-family: var(--font-title);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       color: var(--cyan);
       margin-bottom: 16px;
     }
@@ -355,6 +373,7 @@
     @media (max-width: 600px) {
       header { padding: 16px 20px; }
       main { padding: 40px 16px 80px; }
+      .images-grid { gap: 16px; }
       .images-grid.two,
       .images-grid.three { grid-template-columns: 1fr; }
       .btn { padding: 12px 18px; font-size: 0.75rem; }
@@ -393,9 +412,10 @@ const steps = [
 
   {
     title: "Télécharger DriveSync",
-    description: "Rendez-vous sur la page GitHub Releases et téléchargez la version correspondant à votre système — AppImage pour Linux, ZIP pour Windows.",
+    description: "Rendez-vous sur la page GitHub Releases ou via ce lien <a href='https://github.com/Ferdinaelectro1/DriveSyncV2/releases' target='_blank' style='color:#00d4ff;'>Download DriveSync</a> et téléchargez la version correspondant à votre système — AppImage pour Linux, ZIP pour Windows.",
     images: [
-      { src: "screenshots/step1.png", caption: "Page GitHub Releases" }
+      { src: "assets/github1.png", caption: "Page GitHub Releases" },
+      { src: "assets/github2.png", caption: "Releases par platform  Linux ou windows" }
     ]
   },
 
@@ -403,24 +423,101 @@ const steps = [
     title: "Lancer l'application",
     description: "Sur Linux, rendez le fichier exécutable puis lancez-le. Sur Windows, extrayez le ZIP et double-cliquez sur DriveSync.exe.",
     images: [
-      { src: "screenshots/step2a.png", caption: "Linux — chmod +x" },
-      { src: "screenshots/step2b.png", caption: "Windows — double-clic" }
+      { src: "assets/linux1.png", caption: "Linux — chmod +x" },
+      { src: "assets/linux2.png", caption: "Linux — chmod +x" },
+      { src: "assets/linux3.png", caption: "Linux — chmod +x" },
+      { src: "assets/win1.png", caption: "Windows — double-clic" },
+      { src: "assets/win2.png", caption: "Windows — Extraction du ZIP" },
+      { src: "assets/win3.png", caption: "Windows — Fichier extrait. Lancer l'application en cliquant sur DriveSync.exe" }
     ]
   },
 
-  // ── TEMPLATE POUR AJOUTER UNE ÉTAPE ──────────────────────────
-  // {
-  //   title: "Titre de l'étape",
-  //   description: "Explication de ce que l'utilisateur doit faire à cette étape.",
-  //   images: [
-  //     { src: "screenshots/stepX.png", caption: "Légende optionnelle" },
-  //     { src: "screenshots/stepX2.png", caption: "Deuxième image optionnelle" },
-  //   ]
-  // },
-  // ─────────────────────────────────────────────────────────────
+  {
+     title: "Sélectionner le dossier à synchroniser",
+     description: "Cliquez sur 'Parcourir' et choisissez le dossier que vous souhaitez synchroniser avec Google Drive. DriveSync surveillera ce dossier et synchronisera automatiquement les fichiers qu'il contient.",
+     images: [
+       { src: "assets/1.png", caption: "Interface de DriveSync" },
+       { src: "assets/3.png", caption: "Choix du dossier" },
+       { src: "assets/4.png", caption: "Validation et chemin affiché dans l'interface" },
+     ]
+ },
 
+   {
+     title: "Connecter votre compte Google",
+     description: "Cliquez sur 'Connecter avec Google' et choisissez le compte Google que vous souhaitez utiliser. Ceci afin de permettre à DriveSync d'accéder à votre Google Drive et de synchroniser vos fichiers.",
+     images: [
+       { src: "assets/5.png", caption: "Une fenêtre de connexion s'ouvre dans votre navigateur" },
+       { src: "assets/6.png", caption: "Choissisez votre compte" },
+       { src: "assets/7.png", caption: "Vous atterisez sur cette page. Cliquez sur 'Paramètres avancés'" },
+     ]
+   },
+   {
+     title: "Autoriser l'accès à DriveSync",
+     description: "Validez l'accès à DriveSync en passant par les paramètres avancés, puis confirmez l'autorisation. Une fois ces étapes terminées, votre compte Google sera connecté à l'application. À noter que l'application étant encore en mode test et pas encore validé par google, il est normal que vous ayez un message d'avertissement de sécurité. DriveSync est 100% sûr, il suffit de suivre les étapes pour autoriser l'accès.",
+     images: [
+       { src: "assets/8.png", caption: "Cliquez sur 'Accéder à DriveSync (non sécurisé)'." },
+       { src: "assets/9.png", caption: "Cliquez sur 'Continuer'." },
+       { src: "assets/10.png", caption: "Vous atterissez sur cette Page. Votre compte Google est maintenant connecté." },
+     ]
+   },
+   {
+     title: "Retour à l'application",
+     description: "Nous revenons sur l'application afin de démarrer la synchronisation.",
+     images: [
+       { src: "assets/11.png", caption: "Vous verrez sur l'interface que votre compte Google est connecté." },
+       { src: "assets/11.png", caption: "Vous cliquez sur le boutton 'Demarrer' pour démarrer la synchronisation." },
+     ]
+   },
+   {
+     title: "L'application est maintenant démarré et tourne en arrière-plan",
+     description: "Vous verrez que l'app a démarré et tourne en arrière plan dans la barre des tâches (Windows) ou la barre de menu (Linux). DriveSync continuera à tourner et synchroniser vos fichiers. Vous pouvez couper la synchronisation à tout moment en cliquant sur 'Arrêter' dans cette barre des tâches ou de menu.",
+     images: [
+       { src: "assets/12.png", caption: "Linux — Barre des menus" },
+       { src: "assets/13.png", caption: "Linux — Vous cliquez sur arrêter pour arrêter la synchronisation." },
+       { src: "assets/win_menu.png", caption: "Windows — Barre des tâches" },
+     ]
+   },
+   {
+     title: "Testez la synchronisation",
+     description: "Rendez vous sur votre Google Drive, puis dans la section 'My Drive' vous devriez voir un dossier 'NomDossierLocal-dv' , c'est à dire le nom de votre dossier local suivi du suffixe '-dv'. Ex: Si le dossier que vous avez choisi à synchroniser est 'Mes Documents', vous verrez un dossier 'Mes Documents-dv'. Tout fichier que vous ajoutez dans le dossier que vous avez choisi à l'étape 3 sera automatiquement synchronisé et apparaîtra dans ce dossier DriveSync sur votre Google Drive.",
+     images: [
+       { src: "assets/15.png", caption: "Section My Drive sur Google Drive" },
+       { src: "assets/17.png", caption: "Exemple de dossier synchronisé. On voit bien le suffixe '-dv'" },
+     ]
+   },
+   {
+        title: "Testez la synchronisation (suite)",
+        description: "Dans votre dossier local que vous avez choisi à l'étape 3, ajoutez un fichier (ex: 'test.rs'). Vous verrez que ce fichier est automatiquement synchronisé et apparaît dans le dossier sur votre Google Drive.",
+        images: [
+            { src: "assets/18.png", caption: "Copions un fichier nommé 'test.rs' dans le dossier local" },
+            { src: "assets/19.png", caption: "Le fichier est automatiquement synchronisé sur Google Drive. Nous voyons le fichier apparaître dans le dossier sur notre google drive." },
+        ]
+    },
+    {
+        title: "Testez avec un autre type de fichier",
+        description: "Essayons maintenant avec un fichier image. Ajoutez un fichier 'images.jpeg' dans le dossier local — peu importe le type de fichier, DriveSync le synchronisera automatiquement sur votre Google Drive.",
+        images: [
+            { src: "assets/20.png", caption: "Copions un autre fichier nommé 'images.jpeg' dans le dossier local" },
+            { src: "assets/21.png", caption: "Le fichier 'images.jpeg' est automatiquement synchronisé sur Google Drive et apparaît dans le dossier sur notre google drive." },
+        ]
+    },
+    {
+        title: "Testons la synchronisation (suite), testons la suppression de fichiers",
+        description: "Dans votre dossier local que vous avez choisi à l'étape 3, supprimez un fichier (ex: 'test.rs'). Vous verrez que ce fichier est automatiquement supprimé sur Google Drive.",
+        images: [
+            { src: "assets/22.png", caption: "Supprimons le fichier 'images.jpeg' du dossier local" },
+            { src: "assets/23.png", caption: "Le fichier est automatiquement supprimé sur Google Drive." },
+        ]
+    },
+    {
+        title: "Arrêter la synchronisation",
+        description: "Pour arrêter la synchronisation, cliquez sur l'icône de DriveSync dans la barre des tâches (Windows) ou la barre de menu (Linux), puis cliquez sur 'Arrêter'. Cela arrêtera la synchronisation et fermera l'application. Vous pouvez redémarrer la synchronisation à tout moment en relançant l'application.",
+        images: [
+            { src: "assets/24.png", caption: "Cliquez sur 'Arrêter la synchronisation' pour mettre fin à la synchronisation." },
+            { src: "assets/25.png", caption: "La synchronisation est arrêtée." },
+        ]
+    },
 ];
-// ═══════════════════════════════════════════════════════════════
 
 // ── MOTEUR ──────────────────────────────────────────────────────
 let current = 0;
